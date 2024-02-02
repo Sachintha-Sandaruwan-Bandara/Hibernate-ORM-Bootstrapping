@@ -4,6 +4,7 @@ package config;
     @created 2/2/2024 - 3:54 PM 
 */
 
+import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -33,7 +34,7 @@ public class SessionFactoryConfig {
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
         //2.create a metadata object
-        Metadata metadata= new MetadataSources(serviceRegistry)/*.addAnnotatedClass()*/.getMetadataBuilder().build();
+        Metadata metadata= new MetadataSources(serviceRegistry).addAnnotatedClass(Customer.class).getMetadataBuilder().build();
 
         //3.create sessionFactory
         SessionFactory sessionFactory = metadata.buildSessionFactory();
