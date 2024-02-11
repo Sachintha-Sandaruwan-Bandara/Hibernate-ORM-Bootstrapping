@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hibernate-ORM-Bootstrapping.iml" filepath="$PROJECT_DIR$/Hibernate-ORM-Bootstrapping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Hibernate-Property-Assignment/Hibernate-Property-Assignment.iml" filepath="$PROJECT_DIR$/../Hibernate-Property-Assignment/Hibernate-Property-Assignment.iml" />
     </modules>
   </component>
 </project>

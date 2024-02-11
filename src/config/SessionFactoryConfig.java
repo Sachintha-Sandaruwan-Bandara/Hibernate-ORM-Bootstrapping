@@ -4,6 +4,7 @@ package config;
     @created 2/2/2024 - 3:54 PM 
 */
 
+
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,32 +14,36 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class SessionFactoryConfig {
-    private static SessionFactoryConfig factoryConfig;
-
-    private SessionFactoryConfig() {
-
-    }
-
-    public static SessionFactoryConfig getInstance() {
-//        if (null == factoryConfig) {
-//            factoryConfig = new SessionFactoryConfig();
-//        } else {
-//            return factoryConfig;
-//        }
-        return (null == factoryConfig)?factoryConfig=new SessionFactoryConfig():factoryConfig;
-
-
-    }
-    public Session getSession(){
-        //1.create service registry
+    private static SessionFactoryConfig sessionFactoryConfig;
+    private final SessionFactory sessionFactory;
+    private SessionFactoryConfig(){
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
-        //2.create a metadata object
-        Metadata metadata= new MetadataSources(serviceRegistry).addAnnotatedClass(Customer.class).getMetadataBuilder().build();
+        //2. Create a Metadata Object
+        Metadata metadata = new MetadataSources(serviceRegistry)
+                .addAnnotatedClass(Customer.class)
+                .getMetadataBuilder().build();
 
-        //3.create sessionFactory
-        SessionFactory sessionFactory = metadata.buildSessionFactory();
+        //addAnnotatedClass() is used to add the annotated class to the metadata
 
-        return sessionFactory.openSession();
+
+
+        //3. Create a Session Factory
+        sessionFactory = metadata.buildSessionFactory();
     }
+    public static SessionFactoryConfig getInstance(){
+        return (sessionFactoryConfig==null)?sessionFactoryConfig=new SessionFactoryConfig(): sessionFactoryConfig;
+    }
+
+    public Session getSession(){
+        //1. Create a Service Registry
+
+
+        //Create and Open the session
+        return sessionFactory.openSession();
+
+        //5. close the session
+    }
+
 }
+

@@ -14,14 +14,17 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class Customer {
     @Id //primary key
-    @Column(name = "cus_id")//column name
+    @Column(name = "customer_id")//column name
     private int id;
-    @Column(name = "name")
+    @Column(name = "customer_name")
     private String name;
-    @Column(name = "address")
+    @Column(name = "customer_address")
     private String address;
-    @Column(name = "salary")
+    @Column(name = "customer_salary")
     private double salary;
+
+    @Column(name =" mobile")
+    private int mobile;
 
     public Customer() {
     }
@@ -63,5 +66,26 @@ public class Customer {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+
+
+    public int getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(int mobile) {
+        this.mobile = mobile;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", salary=" + salary +
+                ", mobile=" + mobile +
+                '}';
     }
 }
