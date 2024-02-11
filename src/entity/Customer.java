@@ -1,11 +1,14 @@
 package entity;
 
+import embedded.MobileNumber;
 import embedded.NameIdentifier;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     @author Sachi_S_Bandara
@@ -30,8 +33,16 @@ public class Customer {
     @Column(name = "customer_salary")
     private double salary;
 
-    @Column(name =" mobile")
-    private int mobile;
+//    @Column(name =" mobile")
+//    private int mobile;
+
+    @ElementCollection
+    @CollectionTable(name = "customer_mobile_nums",
+    joinColumns = @JoinColumn(name = "customer_id"))
+
+    private List<MobileNumber> mobileNumbers=new ArrayList<>();
+
+
     @CreationTimestamp
     private Timestamp createdDateTime;
     @UpdateTimestamp
@@ -81,13 +92,13 @@ public class Customer {
 
 
 
-    public int getMobile() {
-        return mobile;
-    }
+//    public int getMobile() {
+//        return mobile;
+//    }
 
-    public void setMobile(int mobile) {
-        this.mobile = mobile;
-    }
+//    public void setMobile(int mobile) {
+//        this.mobile = mobile;
+//    }
 
     @Override
     public String toString() {
@@ -95,7 +106,7 @@ public class Customer {
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", salary=" + salary +
-                ", mobile=" + mobile +
+//                ", mobile=" + mobile +
                 '}';
     }
 
@@ -105,5 +116,13 @@ public class Customer {
 
     public void setNameIdentifier(NameIdentifier nameIdentifier) {
         this.nameIdentifier = nameIdentifier;
+    }
+
+    public List<MobileNumber> getMobileNumbers() {
+        return mobileNumbers;
+    }
+
+    public void setMobileNumbers(List<MobileNumber> mobileNumbers) {
+        this.mobileNumbers = mobileNumbers;
     }
 }

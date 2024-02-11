@@ -4,10 +4,14 @@
 */
 
 import config.SessionFactoryConfig;
+import embedded.MobileNumber;
 import embedded.NameIdentifier;
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Appinitializer {
     public static void main(String[] args) {
@@ -27,7 +31,20 @@ public class Appinitializer {
       customer.setNameIdentifier(nameIdentifier);
       customer.setAddress("Matara");
       customer.setSalary(5500);
-      customer.setMobile(03030333);
+//      customer.setMobile(03030333);
+      MobileNumber home = new MobileNumber();
+      home.setType("Home");
+      home.setMobileNumber("073938383839");
+
+      MobileNumber mobile = new MobileNumber();
+      mobile.setType("Home");
+      mobile.setMobileNumber("073938383839");
+
+      List<MobileNumber> mobileNumbers = new ArrayList<>();
+      mobileNumbers.add(home);
+      mobileNumbers.add(mobile);
+
+      customer.setMobileNumbers(mobileNumbers);
 
       session.save(customer);
       transaction.commit();
