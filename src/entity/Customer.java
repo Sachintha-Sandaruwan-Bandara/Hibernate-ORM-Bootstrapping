@@ -1,9 +1,11 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import embedded.NameIdentifier;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 /*
     @author Sachi_S_Bandara
@@ -14,24 +16,33 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class Customer {
     @Id //primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) //generated value for id
     @Column(name = "customer_id")//column name
     private int id;
+
+    //@Transient //only for entity class and not to database
     @Column(name = "customer_name")
-    private String name;
+   // private String name;
+    private NameIdentifier nameIdentifier;
     @Column(name = "customer_address")
     private String address;
+
     @Column(name = "customer_salary")
     private double salary;
 
     @Column(name =" mobile")
     private int mobile;
+    @CreationTimestamp
+    private Timestamp createdDateTime;
+    @UpdateTimestamp
+    private Timestamp updateDateTime;
 
     public Customer() {
     }
 
     public Customer(int id, String name, String address, double salary) {
         this.id = id;
-        this.name = name;
+        //this.name = name;
         this.address = address;
         this.salary = salary;
     }
@@ -44,13 +55,13 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getAddress() {
         return address;
@@ -82,10 +93,17 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", salary=" + salary +
                 ", mobile=" + mobile +
                 '}';
+    }
+
+    public NameIdentifier getNameIdentifier() {
+        return nameIdentifier;
+    }
+
+    public void setNameIdentifier(NameIdentifier nameIdentifier) {
+        this.nameIdentifier = nameIdentifier;
     }
 }
