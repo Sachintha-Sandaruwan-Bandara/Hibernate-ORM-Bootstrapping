@@ -1,60 +1,67 @@
 package entity;
 
+import entity.Customer;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-/*
-    @author Sachi_S_Bandara
-    @created 2/18/2024 - 1:03 PM 
-*/
 @Entity
-@Table(name = "`order`")
+@Table(name = "orders")
 public class Order {
-    @ManyToMany
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_id")
+    @Id
+    @GeneratedValue
     private int id;
-    @Column(name = "order_discription")
+
+    @Column(name = "order_description")
     private String description;
 
-    @Column(name = "order_date&time")
-    private Timestamp orderDateTime;
+    @CreationTimestamp
+    @Column(name = "order_date_time")
+    private Timestamp dateAndTime;
 
     public Order() {
     }
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;     //order ekk customerta tyenne many to one relationship ekak
 
-    public Order(int id, String description, Timestamp orderDateTime) {
+     @ManyToMany
+     private List<Item>items=new ArrayList<>();
+
+    public Order(int id, String description, Timestamp dateAndTime) {
         this.id = id;
         this.description = description;
-        this.orderDateTime = orderDateTime;
+        this.dateAndTime = dateAndTime;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public Date getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Timestamp getOrderDateTime() {
-        return orderDateTime;
-    }
-
-    public void setOrderDateTime(Timestamp orderDateTime) {
-        this.orderDateTime = orderDateTime;
+    public void setDateAndTime(Timestamp dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 
     @Override
@@ -62,7 +69,7 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", orderDateTime=" + orderDateTime +
+                ", dateAndTime=" + dateAndTime +
                 '}';
     }
 }

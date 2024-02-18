@@ -8,8 +8,7 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer {
 
-    @OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY )
-    private List<Order>orders=new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
@@ -21,8 +20,13 @@ public class Customer {
     @Column(name = "customer_address")
     private String address;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY,mappedBy ="customer")
+    private List<Order>orders=new ArrayList<>();
+
     public Customer() {
     }
+
+
 
     public Customer(int id, String name, String address) {
         this.id = id;
@@ -60,6 +64,7 @@ public class Customer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+               // ", orders=" + orders +
                 '}';
     }
 }

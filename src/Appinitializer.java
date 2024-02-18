@@ -76,12 +76,14 @@ public class Appinitializer {
     }
   private static Customer getCustomer() {
     Customer customer=new Customer();
-    // customer.setId(69);
+     customer.setId(69);
+     customer.setName("sami");
+     customer.setAddress("galle");
     // customer.setName("Sachini");
-    NameIdentifier nameIdentifier = new NameIdentifier();
-    nameIdentifier.setFirstName("kamal");
-    nameIdentifier.setMiddleName("kumara");
-    nameIdentifier.setLastName("bandara");
+//    NameIdentifier nameIdentifier = new NameIdentifier();
+//    nameIdentifier.setFirstName("kamal");
+//    nameIdentifier.setMiddleName("kumara");
+//    nameIdentifier.setLastName("bandara");
 
 
     return customer;
