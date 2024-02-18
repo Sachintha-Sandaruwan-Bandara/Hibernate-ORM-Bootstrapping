@@ -19,9 +19,7 @@ public class SessionFactoryConfig {
     private SessionFactoryConfig(){
 
         //2. Create a Metadata Object
-        Metadata metadata = new MetadataSources(new StandardServiceRegistryBuilder().configure().build())
-                .addAnnotatedClass(Customer.class)
-                .getMetadataBuilder().build();
+
 
         //addAnnotatedClass() is used to add the annotated class to the metadata
 
