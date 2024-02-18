@@ -5,15 +5,9 @@ package repository;
 */
 
 import config.SessionFactoryConfig;
-import embedded.MobileNumber;
-import embedded.NameIdentifier;
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CustomerRepository {
     private Session session;
@@ -46,6 +40,37 @@ public class CustomerRepository {
             e.printStackTrace();
             throw e;
 
+        }
+    }
+
+    public boolean updateCustomer(Customer customer){
+        Transaction transaction = session.beginTransaction();
+        try{
+            session.update(customer);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (Exception e){
+            transaction.rollback();
+            session.close();
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
+    public boolean deleteCustomer(Customer customer){
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.delete(customer);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch  (Exception e){
+            transaction.rollback();
+            session.close();
+            e.printStackTrace();
+            return false;
         }
     }
 

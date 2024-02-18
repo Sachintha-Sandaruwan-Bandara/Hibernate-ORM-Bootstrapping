@@ -56,14 +56,24 @@ public class Appinitializer {
 //      deletetransaction.commit();
 //      deleteSession.close();
 
-
+//save
       CustomerRepository customerRepository = new CustomerRepository();
       customerRepository.saveCustomer(getCustomer());
 
+//get
+      customerRepository = new CustomerRepository();
+      Customer customer = customerRepository.getCustomer(1);
+      System.out.println(customer);
 
 
+//update
+       customerRepository = new CustomerRepository();
+       customer.setAddress("heh");
+       customerRepository.updateCustomer(customer);
+//delete
+      customerRepository = new CustomerRepository();
+      customerRepository.deleteCustomer(customer);
     }
-
   private static Customer getCustomer() {
     Customer customer=new Customer();
     // customer.setId(69);
