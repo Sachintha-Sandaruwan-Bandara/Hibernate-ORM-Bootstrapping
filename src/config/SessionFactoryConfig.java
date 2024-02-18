@@ -17,10 +17,9 @@ public class SessionFactoryConfig {
     private static SessionFactoryConfig sessionFactoryConfig;
     private final SessionFactory sessionFactory;
     private SessionFactoryConfig(){
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
         //2. Create a Metadata Object
-        Metadata metadata = new MetadataSources(serviceRegistry)
+        Metadata metadata = new MetadataSources(new StandardServiceRegistryBuilder().configure().build())
                 .addAnnotatedClass(Customer.class)
                 .getMetadataBuilder().build();
 
@@ -29,7 +28,9 @@ public class SessionFactoryConfig {
 
 
         //3. Create a Session Factory
-        sessionFactory = metadata.buildSessionFactory();
+        sessionFactory = new MetadataSources(new StandardServiceRegistryBuilder().configure().build())
+                .addAnnotatedClass(Customer.class)
+                .getMetadataBuilder().build().buildSessionFactory();
     }
     public static SessionFactoryConfig getInstance(){
         return (sessionFactoryConfig==null)?sessionFactoryConfig=new SessionFactoryConfig(): sessionFactoryConfig;
