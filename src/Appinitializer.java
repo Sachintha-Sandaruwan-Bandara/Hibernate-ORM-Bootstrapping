@@ -65,14 +65,14 @@ public class Appinitializer {
       Customer customer = customerRepository.getCustomer(1);
       System.out.println(customer);
 
-
-//update
-       customerRepository = new CustomerRepository();
-       customer.setAddress("heh");
-       customerRepository.updateCustomer(customer);
-//delete
-      customerRepository = new CustomerRepository();
-      customerRepository.deleteCustomer(customer);
+//
+////update
+//       customerRepository = new CustomerRepository();
+//       customer.setAddress("heh");
+//       customerRepository.updateCustomer(customer);
+////delete
+//      customerRepository = new CustomerRepository();
+//      customerRepository.deleteCustomer(customer);
     }
   private static Customer getCustomer() {
     Customer customer=new Customer();
@@ -82,23 +82,8 @@ public class Appinitializer {
     nameIdentifier.setFirstName("kamal");
     nameIdentifier.setMiddleName("kumara");
     nameIdentifier.setLastName("bandara");
-    customer.setNameIdentifier(nameIdentifier);
-    customer.setAddress("Matara");
-    customer.setSalary(5500);
-//      customer.setMobile(03030333);
-    MobileNumber home = new MobileNumber();
-    home.setType("Home");
-    home.setMobileNumber("073938383839");
 
-    MobileNumber mobile = new MobileNumber();
-    mobile.setType("Home");
-    mobile.setMobileNumber("073938383839");
 
-    List<MobileNumber> mobileNumbers = new ArrayList<>();
-    mobileNumbers.add(home);
-    mobileNumbers.add(mobile);
-
-    customer.setMobileNumbers(mobileNumbers);
     return customer;
   }
 
