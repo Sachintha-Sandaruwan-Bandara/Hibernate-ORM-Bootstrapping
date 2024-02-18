@@ -34,6 +34,10 @@ public class Order {
      @ManyToMany
      private List<Item>items=new ArrayList<>();
 
+
+     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+     private List<OrderDetail>orderDetails=new ArrayList<>();
+
     public Order(int id, String description, Timestamp dateAndTime) {
         this.id = id;
         this.description = description;
