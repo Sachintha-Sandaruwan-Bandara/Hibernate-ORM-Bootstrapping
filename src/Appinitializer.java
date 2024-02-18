@@ -9,6 +9,7 @@ import embedded.NameIdentifier;
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,38 +18,15 @@ public class Appinitializer {
     public static void main(String[] args) {
 
 //        1.save
-// object reuse
-      Session session =  SessionFactoryConfig.getInstance().getSession();
-
-        Transaction transaction = session.beginTransaction();
-      Customer customer=new Customer();
-     // customer.setId(69);
-     // customer.setName("Sachini");
-      NameIdentifier nameIdentifier = new NameIdentifier();
-      nameIdentifier.setFirstName("kamal");
-      nameIdentifier.setMiddleName("kumara");
-      nameIdentifier.setLastName("bandara");
-      customer.setNameIdentifier(nameIdentifier);
-      customer.setAddress("Matara");
-      customer.setSalary(5500);
-//      customer.setMobile(03030333);
-      MobileNumber home = new MobileNumber();
-      home.setType("Home");
-      home.setMobileNumber("073938383839");
-
-      MobileNumber mobile = new MobileNumber();
-      mobile.setType("Home");
-      mobile.setMobileNumber("073938383839");
-
-      List<MobileNumber> mobileNumbers = new ArrayList<>();
-      mobileNumbers.add(home);
-      mobileNumbers.add(mobile);
-
-      customer.setMobileNumbers(mobileNumbers);
-
-      session.save(customer);
-      transaction.commit();
-      session.close();
+// //object reuse
+//      Session session =  SessionFactoryConfig.getInstance().getSession();
+//
+//        Transaction transaction = session.beginTransaction();
+//      Customer customer = getCustomer();
+//
+//      session.save(customer);
+//      transaction.commit();
+//      session.close();
         //get
 
 //      Session getSession = SessionFactoryConfig.getInstance().getSession();
@@ -78,6 +56,40 @@ public class Appinitializer {
 //      deletetransaction.commit();
 //      deleteSession.close();
 
-}
+
+      CustomerRepository customerRepository = new CustomerRepository();
+      customerRepository.saveCustomer(getCustomer());
+
+
+
+    }
+
+  private static Customer getCustomer() {
+    Customer customer=new Customer();
+    // customer.setId(69);
+    // customer.setName("Sachini");
+    NameIdentifier nameIdentifier = new NameIdentifier();
+    nameIdentifier.setFirstName("kamal");
+    nameIdentifier.setMiddleName("kumara");
+    nameIdentifier.setLastName("bandara");
+    customer.setNameIdentifier(nameIdentifier);
+    customer.setAddress("Matara");
+    customer.setSalary(5500);
+//      customer.setMobile(03030333);
+    MobileNumber home = new MobileNumber();
+    home.setType("Home");
+    home.setMobileNumber("073938383839");
+
+    MobileNumber mobile = new MobileNumber();
+    mobile.setType("Home");
+    mobile.setMobileNumber("073938383839");
+
+    List<MobileNumber> mobileNumbers = new ArrayList<>();
+    mobileNumbers.add(home);
+    mobileNumbers.add(mobile);
+
+    customer.setMobileNumbers(mobileNumbers);
+    return customer;
+  }
 
 }
