@@ -1,11 +1,15 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
 
+    @OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY )
+    private List<Order>orders=new ArrayList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
