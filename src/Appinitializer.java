@@ -10,6 +10,7 @@ import entity.Customer;
 import entity.Order;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import projection.CustomerProjection;
 import repository.CustomerRepository;
 
 import java.util.ArrayList;
@@ -92,6 +93,26 @@ public class Appinitializer {
 
             System.out.println(order);
 
+        }
+
+
+
+        CustomerRepository customerRepository4=new CustomerRepository();
+
+        List<Customer> customerList = customerRepository4.getCustomerHQL();
+
+        for (Customer cust:customerList) {
+            System.out.println(cust);
+
+        }
+
+        CustomerRepository customerRepository5=new CustomerRepository();
+        List<CustomerProjection> customerProjectionList = customerRepository5.getCustomerProjection();
+        System.out.println("-----------customer projection----------------");
+        for (CustomerProjection customerProjection:
+             customerProjectionList) {
+
+            System.out.println(customerProjection);
         }
 
 
