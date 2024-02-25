@@ -101,10 +101,9 @@ public class CustomerRepository {
     }
 
     public List<Order>getOrderByCustomerId(int cusId){
-        String sql="SELECT C FROM Order AS O \n" +
-                "INNER JOIN Customer AS C\n" +
-                "ON O.customer.id=C.id \n" +
-                "WHERE O.customer.id= :cus_id";
+        String sql="SELECT  O  FROM  Order AS O\n" +                    //order table eken ena result eka o kiyana namkinnganna e kiyana result eka select krala ganna
+                "INNER JOIN Customer AS C ON O.customer.id = C.id\n" +
+                "WHERE O.customer.id=:cus_id\n";
 
         Query query = session.createQuery(sql);
         query.setParameter("cus_id",cusId);

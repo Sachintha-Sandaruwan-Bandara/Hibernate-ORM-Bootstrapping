@@ -7,6 +7,7 @@ import config.SessionFactoryConfig;
 import embedded.MobileNumber;
 import embedded.NameIdentifier;
 import entity.Customer;
+import entity.Order;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import repository.CustomerRepository;
@@ -76,17 +77,28 @@ public class Appinitializer {
 
 
 
-        CustomerRepository customerRepository1 = new CustomerRepository();
-        customerRepository1.getAllCustomersNative();
+//        CustomerRepository customerRepository1 = new CustomerRepository();
+//        customerRepository1.getAllCustomersNative();
+//
+//        CustomerRepository customerRepository2 = new CustomerRepository();
+//        customerRepository2.getAllCustomersJPQL();
 
-        CustomerRepository customerRepository2 = new CustomerRepository();
-        customerRepository2.getAllCustomersJPQL();
+
+
+       CustomerRepository customerRepository3=new CustomerRepository();
+        List<Order> ordersList = customerRepository3.getOrderByCustomerId(1);
+
+        for (Order order :ordersList) {
+
+            System.out.println(order);
+
+        }
 
 
     }
   private static Customer getCustomer() {
     Customer customer=new Customer();
-     customer.setId(69);
+     //customer.setId(69);
      customer.setName("sami");
      customer.setAddress("galle");
     // customer.setName("Sachini");
@@ -97,6 +109,10 @@ public class Appinitializer {
 
 
     return customer;
+
+
+
+
   }
 
 
