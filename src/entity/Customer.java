@@ -8,9 +8,8 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private int id;
 
@@ -20,13 +19,12 @@ public class Customer {
     @Column(name = "customer_address")
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY,mappedBy ="customer")
-    private List<Order>orders=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")   //customerge paththen blnnone relationship ek hoyganna
+    private List<Order> orders=new ArrayList<>();  //customer has orders kiyla define krnna thama arryalist ekk dmme
+                                                   //has-a relationship
 
     public Customer() {
     }
-
-
 
     public Customer(int id, String name, String address) {
         this.id = id;
@@ -64,7 +62,6 @@ public class Customer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-               // ", orders=" + orders +
                 '}';
     }
 }

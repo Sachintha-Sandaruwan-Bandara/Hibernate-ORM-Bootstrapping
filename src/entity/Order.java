@@ -1,6 +1,5 @@
 package entity;
 
-import entity.Customer;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -31,12 +30,11 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;     //order ekk customerta tyenne many to one relationship ekak
 
-     @ManyToMany
-     private List<Item>items=new ArrayList<>();
 
-
-     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-     private List<OrderDetail>orderDetails=new ArrayList<>();
+//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private List<Item> items=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "order")
+    private List<OrderDetail>orderDetails=new ArrayList<>();
 
     public Order(int id, String description, Timestamp dateAndTime) {
         this.id = id;

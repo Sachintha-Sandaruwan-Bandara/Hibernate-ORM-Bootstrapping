@@ -23,9 +23,15 @@ public class Item {
     @Column(name = "unit_price")
     private double unitPrice;
 
+    public Item() {
+    }
 
-    @ManyToMany(mappedBy = "items")
-    private List<Order>orders=new ArrayList<>();
+    public Item(int id, String itemName, int qty, double unitPrice) {
+        this.id = id;
+        this.itemName = itemName;
+        this.qty = qty;
+        this.unitPrice = unitPrice;
+    }
 
     public int getId() {
         return id;
@@ -68,4 +74,11 @@ public class Item {
                 ", unitPrice=" + unitPrice +
                 '}';
     }
+
+//    @ManyToMany(mappedBy = "items") //orders paththe list eke nama
+//    private List<Order> orders=new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "item")
+    private List<OrderDetail> orderDetails=new ArrayList<>();
+
 }

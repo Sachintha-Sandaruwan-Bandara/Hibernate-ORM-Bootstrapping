@@ -8,6 +8,11 @@ import config.SessionFactoryConfig;
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+
+import java.util.List;
+import java.util.Objects;
 
 public class CustomerRepository {
     private Session session;
@@ -72,6 +77,25 @@ public class CustomerRepository {
             e.printStackTrace();
             return false;
         }
+
+    }
+    public List<Objects[]> getAllCustomersNative(){ //Query object
+        String sql = "SELECT * FROM customer";
+        NativeQuery query = session.createSQLQuery(sql);
+        List<Objects[]> list =query.list();
+        for (Object customer1 : list){
+            System.out.println(customer1);
+        }
+        session.close();
+        return  list;
     }
 
+    public List<Customer> getAllCustomersJPQL(){
+        String sql="SELECT C FROM Customer As C";
+        Query query = session.createQuery(sql);
+        List<Customer> list = query.list();
+        session.close();
+        return list;
+
+    }
 }

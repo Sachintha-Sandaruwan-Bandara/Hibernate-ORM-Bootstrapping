@@ -9,7 +9,7 @@ import java.io.Serializable;
     @created 2/18/2024 - 2:44 PM 
 */
 @Embeddable
-public class OrderDetailPK  {
+public class OrderDetailPK implements Serializable {
     @Column(name = "order_id")
     private int orderId;
 

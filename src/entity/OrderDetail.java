@@ -4,32 +4,38 @@ import embedded.OrderDetailPK;
 
 import javax.persistence.*;
 
-/*
-    @author Sachi_S_Bandara
-    @created 2/18/2024 - 2:42 PM 
-*/
-@Table(name = "order_detail")
+@Entity
+@Table(name = "order_details")
 public class OrderDetail {
-
-    @Column(name = "order_qty")
+    @EmbeddedId
+    private OrderDetailPK orderDetailPK;
+    @Column(name = "order_quantity")
     private int orderQty;
 
     @Column(name = "order_price")
     private double price;
 
-    @EmbeddedId
-    private OrderDetailPK orderDetailPK;
     @ManyToOne
-    @JoinColumn(name = "order_id",referencedColumnName = "order_id",insertable = false,updatable = false)
+    @JoinColumn(name = "order_id"
+               ,referencedColumnName = "order_id"
+               ,insertable = false
+               ,updatable = false)
     private Order order;
+    @ManyToOne
+    @JoinColumn(name = "item_id"
+               ,referencedColumnName = "item_id"
+               ,insertable = false
+               ,updatable = false)
+    private Item item;
+
+
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderQty, double price, OrderDetailPK orderDetailPK) {
+    public OrderDetail(int orderQty, double price) {
         this.orderQty = orderQty;
         this.price = price;
-        this.orderDetailPK = orderDetailPK;
     }
 
     public int getOrderQty() {
@@ -48,20 +54,11 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public OrderDetailPK getOrderDetailPK() {
-        return orderDetailPK;
-    }
-
-    public void setOrderDetailPK(OrderDetailPK orderDetailPK) {
-        this.orderDetailPK = orderDetailPK;
-    }
-
     @Override
     public String toString() {
         return "OrderDetail{" +
                 "orderQty=" + orderQty +
                 ", price=" + price +
-                ", orderDetailPK=" + orderDetailPK +
                 '}';
     }
 }

@@ -73,6 +73,16 @@ public class Appinitializer {
 ////delete
 //      customerRepository = new CustomerRepository();
 //      customerRepository.deleteCustomer(customer);
+
+
+
+        CustomerRepository customerRepository1 = new CustomerRepository();
+        customerRepository1.getAllCustomersNative();
+
+        CustomerRepository customerRepository2 = new CustomerRepository();
+        customerRepository2.getAllCustomersJPQL();
+
+
     }
   private static Customer getCustomer() {
     Customer customer=new Customer();
@@ -88,5 +98,8 @@ public class Appinitializer {
 
     return customer;
   }
+
+
+
 
 }
