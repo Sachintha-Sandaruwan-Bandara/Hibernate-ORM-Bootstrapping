@@ -6,6 +6,7 @@ package repository;
 
 import config.SessionFactoryConfig;
 import entity.Customer;
+import entity.Order;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -98,4 +99,20 @@ public class CustomerRepository {
         return list;
 
     }
+
+    public List<Order>getOrderByCustomerId(int cusId){
+        String sql="SELECT C FROM Order AS O \n" +
+                "INNER JOIN Customer AS C\n" +
+                "ON O.customer.id=C.id \n" +
+                "WHERE O.customer.id= :cus_id";
+
+        Query query = session.createQuery(sql);
+        query.setParameter("cus_id",cusId);
+        List <Order> list = query.list();
+        session.close();
+        return list;
+    }
+
+
+
 }
